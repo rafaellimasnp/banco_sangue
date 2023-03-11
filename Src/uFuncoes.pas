@@ -18,8 +18,35 @@ procedure DesabilitaComponentes(Tela: TForm; Habilita: boolean = False;
 function ConvData(Data: TDateTime; DataHora: boolean = False): string;
 function IsDigit(Texto: string): boolean;
 function strLeft(Texto: string; Tamanho: Integer): string; // left do clipper
+function CalcIdade(const ADataNasc: TDateTime;
+  const ADataAtual: TDateTime): Integer;
 
 implementation
+
+function CalcIdade(const ADataNasc: TDateTime;
+  const ADataAtual: TDateTime): Integer;
+var
+  Month, Day, Year, CurrentYear, CurrentMonth, CurrentDay: Word;
+begin
+  DecodeDate(ADataNasc, Year, Month, Day);
+  DecodeDate(ADataAtual, CurrentYear, CurrentMonth, CurrentDay);
+  if (Year = CurrentYear) and (Month = CurrentMonth) and (Day = CurrentDay) then
+  begin
+    Result := 0;
+  end
+  else
+  begin
+    Result := CurrentYear - Year;
+    if (Month > CurrentMonth) then
+      Dec(Result)
+    else
+    begin
+      if Month = CurrentMonth then
+        if (Day > CurrentDay) then
+          Dec(Result);
+    end;
+  end;
+end;
 
 function strLeft(Texto: string; Tamanho: Integer): string;
 var

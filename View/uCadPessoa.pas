@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBaseFormCadastro, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, uFuncoes,
   scControls, scCalendar, uPessoaClasse, udmDados;
 
 type
@@ -41,12 +41,25 @@ implementation
 { TfCadPessoa }
 
 function TfCadPessoa.CamposEmBranco: Boolean;
+var
+  Idade: integer;
 begin
-
   if dmDados.GetPessoaCadastrada(edNome.Text, edDataNasc.Date) then
   begin
     Result := True;
     ShowMessage('Pessoa ja cadastrada no sistema');
+    Exit;
+  end;
+
+  Idade := CalcIdade(edDataNasc.Date, Now);
+
+  if (Idade < 18) or (Idade > 60) then
+  begin
+    Result := True;
+    ShowMessage
+      ('Somente maiores de 18 anos e adultos menores de 60 anos podem ser cadastrados');
+    if edNome.CanFocus then
+      edNome.SetFocus;
     Exit;
   end;
 
