@@ -27,6 +27,7 @@ type
     FNomeArquivoINI: string;
     procedure ConectarBanco();
     procedure GravarPessoa(const Value: IPessoa);
+    procedure DeletarPessoa(const AID: Int64);
     function CarregarDadosPessoa(const AID: Int64): IPessoa;
     procedure GravarDoacao(const Value: IDoacao);
     function GetPessoaCadastrada(const ANome: string;
@@ -124,10 +125,17 @@ begin
   ConectarBanco();
 end;
 
+procedure TdmDados.DeletarPessoa(const AID: Int64);
+begin
+  FTextoSQL := 'DELETE FROM BS_PESSOA WHERE PES_ID = ' + IntToStr(AID);
+  FQuery.Close;
+  FQuery.SQL.Text := FTextoSQL;
+  FQuery.ExecSQL;
+end;
+
 function TdmDados.GetPessoaCadastrada(const ANome: string;
   const ADataNasc: TDateTime): Boolean;
 begin
-
   ZListaSQL(FQuery, 'SELECT * FROM BS_PESSOA WHERE PES_NOME = ''' + ANome +
     ''' AND PES_DATANASC = ''' + ConvData(ADataNasc) + '''');
 

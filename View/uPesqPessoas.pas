@@ -21,7 +21,7 @@ type
     function FiltraPessoas(BuscarExato: boolean = false): boolean;
     procedure Inserir(); override;
     procedure Alterar(); override;
-    procedure AtivarInativar(); override;
+    procedure Excluir(); override;
     procedure Visualizar(); override;
   public
     Constructor Create;
@@ -55,12 +55,6 @@ begin
 
 end;
 
-procedure TfPesqPessoas.AtivarInativar;
-begin
-  inherited;
-  ShowMessage('Usuário sem acesso para excluir');
-end;
-
 constructor TfPesqPessoas.Create;
 begin
   inherited Create();
@@ -70,6 +64,18 @@ destructor TfPesqPessoas.Destroy;
 begin
 
   inherited;
+end;
+
+procedure TfPesqPessoas.Excluir;
+begin
+  inherited;
+  If MessageDlg('Você tem certeza que gostaria de EXCLUIR esse registro?',
+    mtConfirmation, [mbyes, mbno], 0) = mryes then
+  begin
+    dmDados.DeletarPessoa(sqlviewtabela.fieldbyname('PES_ID').AsInteger);
+    _FiltraTabela();
+  end;
+
 end;
 
 function TfPesqPessoas.FiltraPessoas(BuscarExato: boolean): boolean;
@@ -121,7 +127,8 @@ end;
 procedure TfPesqPessoas.Visualizar;
 begin
   inherited;
-  FCadPessoa := TfCadPessoa.Create(sqlviewtabela.fieldbyname('PES_ID').AsInteger, True);
+  FCadPessoa := TfCadPessoa.Create(sqlviewtabela.fieldbyname('PES_ID')
+    .AsInteger, True);
   try
     FCadPessoa.Execute;
     Self._FiltraTabela();

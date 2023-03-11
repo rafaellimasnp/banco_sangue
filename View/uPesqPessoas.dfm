@@ -18,6 +18,9 @@ inherited fPesqPessoas: TfPesqPessoas
       Left = 583
       ExplicitLeft = 583
     end
+    inherited btnExcluir: TBitBtn
+      Visible = True
+    end
   end
   inherited StatusBar1: TStatusBar
     Width = 612
