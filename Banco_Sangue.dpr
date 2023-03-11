@@ -6,7 +6,8 @@ uses
   udmDados in 'Model\udmDados.pas' {DataModule1: TDataModule},
   uBaseForm in 'Base\uBaseForm.pas' {fBaseForm},
   uBaseFormCadastro in 'Base\uBaseFormCadastro.pas' {fBaseFormCadastro},
-  uFuncoes in 'Src\uFuncoes.pas';
+  uFuncoes in 'Src\uFuncoes.pas',
+  uConfigClasse in 'Controller\uConfigClasse.pas';
 
 {$R *.res}
 
