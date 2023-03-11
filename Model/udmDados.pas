@@ -40,6 +40,7 @@ type
     procedure ConectarBanco();
     procedure GravarPessoa(const Value: IPessoa);
     procedure GravarDoacao(const Value: IDoacao);
+    procedure ZListaSQL(const AQuery: TFDQuery; const ATextoSQL: string);
   end;
 
 var
@@ -128,6 +129,24 @@ begin
   FQuery.ParamByName('TIPOSANGUE').AsString := Value.TipoSang;
 
   FQuery.ExecSQL;
+end;
+
+procedure TdmDados.ZListaSQL(const AQuery: TFDQuery; const ATextoSQL: string);
+begin
+  try
+    AQuery.Close();
+    AQuery.SQL.Text := ATextoSQL;
+    AQuery.Open();
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Ocorreu o seguinte erro ' +
+        'ao tentar acessar o Banco de Dados: ' + #13#13 + 'Tabela: ' +
+        AQuery.Name + #13 + E.Message + #13#13 + ATextoSQL);
+
+      raise;
+    end;
+  end;
 end;
 
 end.

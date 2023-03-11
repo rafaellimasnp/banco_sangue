@@ -20,12 +20,4 @@ object fBaseForm: TfBaseForm
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 16
-  object BitBtn1: TBitBtn
-    Left = 336
-    Top = 184
-    Width = 75
-    Height = 25
-    Caption = 'BitBtn1'
-    TabOrder = 0
-  end
 end

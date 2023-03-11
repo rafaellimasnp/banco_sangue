@@ -8,7 +8,6 @@ uses
 
 type
   TfBaseForm = class(TForm)
-    BitBtn1: TBitBtn;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private

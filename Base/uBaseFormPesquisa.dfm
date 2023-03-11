@@ -3,22 +3,24 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
   Top = 0
   Caption = 'Base Form Pesquisa'
   ClientHeight = 410
-  ClientWidth = 750
+  ClientWidth = 592
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   OnActivate = FormActivate
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object pnBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 750
+    Width = 592
     Height = 61
     Align = alTop
     BevelOuter = bvNone
@@ -26,7 +28,7 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
     ExplicitLeft = -421
     ExplicitWidth = 974
     DesignSize = (
-      750
+      592
       61)
     object btnNovo: TBitBtn
       Left = 1
@@ -350,7 +352,7 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       TabOrder = 3
     end
     object btnSair: TBitBtn
-      Left = 656
+      Left = 498
       Top = 5
       Width = 90
       Height = 50
@@ -469,7 +471,7 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       ExplicitLeft = 880
     end
     object StaticText1: TStaticText
-      Left = 721
+      Left = 563
       Top = 10
       Width = 21
       Height = 15
@@ -789,48 +791,38 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       OnClick = btnExcluirClick
     end
   end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 391
+    Width = 592
+    Height = 19
+    Panels = <>
+    ParentShowHint = False
+    ShowHint = True
+    SimplePanel = True
+    ExplicitTop = 327
+    ExplicitWidth = 500
+  end
   object DBGrid1: TDBGrid
     Left = 0
     Top = 61
-    Width = 750
-    Height = 308
+    Width = 592
+    Height = 330
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clNavy
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = [fsBold]
     OnDblClick = DBGrid1DblClick
-  end
-  object pnFiltro: TPanel
-    Left = 0
-    Top = 369
-    Width = 750
-    Height = 41
-    Align = alBottom
-    BevelInner = bvRaised
-    BevelOuter = bvLowered
-    TabOrder = 2
-    DesignSize = (
-      750
-      41)
-    object edTextoDigitado: TMaskEdit
-      Left = 8
-      Top = 9
-      Width = 734
-      Height = 21
-      Anchors = [akLeft, akTop, akRight]
-      TabOrder = 0
-      Text = ''
-    end
   end
   object sqlViewTabela: TFDQuery
     SQL.Strings = (

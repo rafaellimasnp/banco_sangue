@@ -1,24 +1,30 @@
 inherited fPesqPessoas: TfPesqPessoas
   Caption = 'Pesquisa de Pessoas'
-  ClientWidth = 615
-  ExplicitWidth = 631
+  ClientWidth = 612
+  ExplicitWidth = 628
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnBotoes: TPanel
-    Width = 615
+    Width = 612
     ExplicitLeft = 0
     ExplicitWidth = 750
+    DesignSize = (
+      612
+      61)
     inherited btnSair: TBitBtn
-      Left = 521
+      Left = 518
       ExplicitLeft = 656
     end
     inherited StaticText1: TStaticText
-      Left = 586
+      Left = 583
       ExplicitLeft = 721
     end
   end
+  inherited StatusBar1: TStatusBar
+    Width = 612
+  end
   inherited DBGrid1: TDBGrid
-    Width = 615
+    Width = 612
     DataSource = dsViewTabela
     Columns = <
       item
@@ -31,14 +37,14 @@ inherited fPesqPessoas: TfPesqPessoas
         Expanded = False
         FieldName = 'PES_NOME'
         Title.Caption = 'Nome'
-        Width = 250
+        Width = 215
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'PES_DATANASC'
-        Title.Caption = 'Data Nasc'
-        Width = 120
+        Title.Caption = 'Data Nasc.'
+        Width = 133
         Visible = True
       end
       item
@@ -47,15 +53,6 @@ inherited fPesqPessoas: TfPesqPessoas
         Title.Caption = 'Tipo Sangu'#237'neo'
         Visible = True
       end>
-  end
-  inherited pnFiltro: TPanel
-    Width = 615
-    inherited edTextoDigitado: TMaskEdit
-      Width = 599
-      OnChange = nil
-      OnExit = nil
-      OnKeyPress = nil
-    end
   end
   inherited sqlViewTabela: TFDQuery
     Connection = dmDados.FDConnection

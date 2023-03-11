@@ -10,10 +10,13 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Mask, Vcl.Grids,
-  Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+  Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, uBaseForm, Vcl.ComCtrls, uFuncoes;
 
 type
-  TfBaseFormPesquisa = class(TForm)
+  TfBaseFormPesquisa = class;
+  TBaseFormPesquisaClass = class of TfBaseFormPesquisa;
+
+  TfBaseFormPesquisa = class(TfBaseForm)
     pnBotoes: TPanel;
     btnNovo: TBitBtn;
     btnAlterar: TBitBtn;
@@ -24,15 +27,14 @@ type
     btnVisualizar: TBitBtn;
     StaticText2: TStaticText;
     btnExcluir: TBitBtn;
-    DBGrid1: TDBGrid;
-    pnFiltro: TPanel;
-    edTextoDigitado: TMaskEdit;
     sqlViewTabela: TFDQuery;
     sqlViewTabelaPES_ID: TIntegerField;
     sqlViewTabelaPES_NOME: TStringField;
     sqlViewTabelaPES_DATANASC: TSQLTimeStampField;
     sqlViewTabelaPES_TIPOSANG: TStringField;
     dsViewTabela: TDataSource;
+    StatusBar1: TStatusBar;
+    DBGrid1: TDBGrid;
     procedure FormActivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBGrid1DblClick(Sender: TObject);
@@ -40,6 +42,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnVisualizarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     FDataSet: TDataSet;
     FCampoId: string;
@@ -48,6 +51,9 @@ type
     procedure SetTextoDigitado(const Value: string);
     { Private declarations }
   protected
+    FIdFiltra: Integer;
+    FCampoFiltra: string;
+
     procedure Inserir(); virtual; abstract;
     procedure Alterar(); virtual; abstract;
     procedure AtivarInativar(); virtual; abstract;
@@ -66,11 +72,7 @@ type
     property DataSet: TDataSet read FDataSet write FDataSet;
     property TextoDigitado: string read FTextoDigitado write SetTextoDigitado;
 
-    function Execute(): Integer; overload;
-    function Execute(const ATextoDigitado: string): Integer; overload;
-
-    constructor Create(const ACampoId: string); overload;
-    constructor Create(const ACampoId, ATextoDigitado: string); overload;
+    constructor Create();
     destructor Destroy(); override;
 
   end;
@@ -111,14 +113,9 @@ begin
     ShowMessage('Nenhum registro selecionado!');
 end;
 
-constructor TfBaseFormPesquisa.Create(const ACampoId: string);
+constructor TfBaseFormPesquisa.Create;
 begin
-  Create(ACampoId, EmptyStr);
-end;
-
-constructor TfBaseFormPesquisa.Create(const ACampoId, ATextoDigitado: string);
-begin
-  Create(ACampoId, TextoDigitado);
+  inherited Create();
 end;
 
 procedure TfBaseFormPesquisa.DBGrid1DblClick(Sender: TObject);
@@ -135,16 +132,6 @@ end;
 procedure TfBaseFormPesquisa.DoEscolha(const AId: Integer);
 begin
 
-end;
-
-function TfBaseFormPesquisa.Execute(const ATextoDigitado: string): Integer;
-begin
-  Result := Self.Execute(ATextoDigitado);
-end;
-
-function TfBaseFormPesquisa.Execute: Integer;
-begin
-  Result := Self.Execute(EmptyStr);
 end;
 
 procedure TfBaseFormPesquisa.FormActivate(Sender: TObject);
@@ -182,6 +169,25 @@ begin
       DBGrid1DblClick(Sender)
     else
       Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+end;
+
+procedure TfBaseFormPesquisa.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key >= #32) or (Key = #8) then
+  begin
+    if Key = #8 then
+      TextoDigitado := strLeft(TextoDigitado, Length(TextoDigitado) - 1)
+    else
+      TextoDigitado := TextoDigitado + Key;
+    Key := #0;
+    _FiltraTabela;
+  end;
+
+  if (Key = #13) or (Key = #27) then
+  begin
+    Key := #0;
+    ModalResult := mrOK;
   end;
 end;
 

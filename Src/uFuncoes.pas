@@ -16,8 +16,30 @@ procedure DesabilitaComponentes(Tela: TForm; Habilita: boolean = False;
   WParent: TWinControl = nil);
 
 function ConvData(Data: TDateTime; DataHora: boolean = False): string;
+function IsDigit(Texto: string): boolean;
+function strLeft(Texto: string; Tamanho: Integer): string; // left do clipper
 
 implementation
+
+function strLeft(Texto: string; Tamanho: Integer): string;
+var
+  xx: string;
+begin
+  xx := Copy(Texto, 1, Tamanho);
+  Result := xx;
+end;
+
+function IsDigit(Texto: string): boolean;
+begin
+  if Length(Texto) > 0 then
+    if Texto[1] in ['0' .. '9'] then
+      // ,'1','2','3','4','5','6','7','8','9'] then
+      Result := True
+    else
+      Result := False
+  else
+    Result := False;
+end;
 
 function ConvData(Data: TDateTime; DataHora: boolean = False): string;
 begin
