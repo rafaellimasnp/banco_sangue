@@ -12,7 +12,7 @@ uses
   uDoacaoClasse;
 
 type
-  TDataModule1 = class(TDataModule)
+  TdmDados = class(TDataModule)
     FDConnection: TFDConnection;
     sqlPessoas: TFDQuery;
     dsPessoas: TDataSource;
@@ -43,14 +43,14 @@ type
   end;
 
 var
-  DataModule1: TDataModule1;
+  dmDados: TdmDados;
 
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 
-procedure TDataModule1.CarregarConfiguracoesINI;
+procedure TdmDados.CarregarConfiguracoesINI;
 var
   LArquivoINI: TIniFile;
   LDataBase, LUserName, LServer, LDriver: string;
@@ -70,11 +70,13 @@ begin
 
 end;
 
-procedure TDataModule1.ConectarBanco;
+procedure TdmDados.ConectarBanco;
 begin
   try
     Self.CarregarConfiguracoesINI;
     FDConnection.Open();
+    FQuery := TFDQuery.Create(nil);
+    FQuery.Connection := FDConnection;
   except
     ShowMessage
       ('Erro ao tentar conecatar com o Banco de Dados! Verifique as configurações.');
@@ -82,7 +84,7 @@ begin
   end;
 end;
 
-procedure TDataModule1.ConfigurarConexao(const ADataBase, AUserName, AServer,
+procedure TdmDados.ConfigurarConexao(const ADataBase, AUserName, AServer,
   ADriver: String);
 begin
   with FDConnection.Params do
@@ -96,13 +98,13 @@ begin
   end;
 end;
 
-procedure TDataModule1.DataModuleCreate(Sender: TObject);
+procedure TdmDados.DataModuleCreate(Sender: TObject);
 begin
   FNomeArquivoINI := TConfig.New().GetArquivoINI();
   ConectarBanco();
 end;
 
-procedure TDataModule1.GravarDoacao(const Value: IDoacao);
+procedure TdmDados.GravarDoacao(const Value: IDoacao);
 begin
   FTextoSQL :=
     'INSERT INTO BS_DOACAO(DOA_DATA, DOA_QTDE, PES_ID) values (:DATA, :QUANTIDADE, :PESID)';
@@ -115,7 +117,7 @@ begin
 
 end;
 
-procedure TDataModule1.GravarPessoa(const Value: IPessoa);
+procedure TdmDados.GravarPessoa(const Value: IPessoa);
 begin
   FTextoSQL :=
     'INSERT INTO BS_PESSOA(PES_NOME, PES_DATANASC, PES_TIPOSANG) values (:NOME, :DATANASC, :TIPOSANGUE)';

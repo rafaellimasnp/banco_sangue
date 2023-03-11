@@ -95,7 +95,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Model\udmDados.pas">
-            <Form>DataModule1</Form>
+            <Form>dmDados</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -111,6 +111,18 @@
         <DCCReference Include="Controller\uConfigClasse.pas"/>
         <DCCReference Include="Controller\uPessoaClasse.pas"/>
         <DCCReference Include="Controller\uDoacaoClasse.pas"/>
+        <DCCReference Include="View\uCadPessoa.pas">
+            <Form>fCadPessoa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Base\uBaseFormPesquisa.pas">
+            <Form>fBaseFormPesquisa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uPesqPessoas.pas">
+            <Form>fPesqPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

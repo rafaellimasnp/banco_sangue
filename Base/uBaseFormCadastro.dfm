@@ -5,7 +5,7 @@ object fBaseFormCadastro: TfBaseFormCadastro
   BorderStyle = bsSingle
   Caption = 'Formul'#225'rio de Cadastro Padr'#227'o'
   ClientHeight = 478
-  ClientWidth = 727
+  ClientWidth = 700
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,18 +21,19 @@ object fBaseFormCadastro: TfBaseFormCadastro
   PixelsPerInch = 96
   TextHeight = 16
   object Panel1: TPanel
-    Left = 625
+    Left = 605
     Top = 0
-    Width = 102
+    Width = 95
     Height = 478
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitLeft = 632
     DesignSize = (
-      102
+      95
       478)
     object btnSair: TBitBtn
-      Left = 7
+      Left = 0
       Top = 60
       Width = 90
       Height = 50
@@ -146,9 +147,10 @@ object fBaseFormCadastro: TfBaseFormCadastro
       ModalResult = 2
       ParentFont = False
       TabOrder = 1
+      ExplicitLeft = 7
     end
     object StaticText1: TStaticText
-      Left = 71
+      Left = 64
       Top = 65
       Width = 21
       Height = 14
@@ -164,9 +166,10 @@ object fBaseFormCadastro: TfBaseFormCadastro
       Font.Quality = fqClearTypeNatural
       ParentFont = False
       TabOrder = 2
+      ExplicitLeft = 71
     end
     object btnGravar: TBitBtn
-      Left = 7
+      Left = 0
       Top = 5
       Width = 90
       Height = 50
@@ -281,9 +284,10 @@ object fBaseFormCadastro: TfBaseFormCadastro
       ParentFont = False
       TabOrder = 0
       OnClick = btnGravarClick
+      ExplicitLeft = 7
     end
     object StaticText2: TStaticText
-      Left = 76
+      Left = 69
       Top = 10
       Width = 16
       Height = 14
@@ -299,6 +303,7 @@ object fBaseFormCadastro: TfBaseFormCadastro
       Font.Quality = fqClearTypeNatural
       ParentFont = False
       TabOrder = 3
+      ExplicitLeft = 76
     end
   end
 end
