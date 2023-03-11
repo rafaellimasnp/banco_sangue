@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MSSQL,
   FireDAC.Phys.MSSQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, Dialogs,
-  FireDAC.Comp.Client, uConfigClasse, IniFiles;
+  FireDAC.Comp.Client, uConfigClasse, uPessoaClasse, IniFiles, uFuncoes,
+  uDoacaoClasse;
 
 type
   TDataModule1 = class(TDataModule)
@@ -28,13 +29,17 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
-  public
-    { Public declarations }
-    FNomeArquivoINI: string;
+    FQuery: TFDQuery;
+    FTextoSQL: string;
     procedure ConfigurarConexao(const ADataBase, AUserName, AServer,
       ADriver: String);
     procedure CarregarConfiguracoesINI();
+  public
+    { Public declarations }
+    FNomeArquivoINI: string;
     procedure ConectarBanco();
+    procedure GravarPessoa(const Value: IPessoa);
+    procedure GravarDoacao(const Value: IDoacao);
   end;
 
 var
@@ -95,6 +100,32 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
   FNomeArquivoINI := TConfig.New().GetArquivoINI();
   ConectarBanco();
+end;
+
+procedure TDataModule1.GravarDoacao(const Value: IDoacao);
+begin
+  FTextoSQL :=
+    'INSERT INTO BS_DOACAO(DOA_DATA, DOA_QTDE, PES_ID) values (:DATA, :QUANTIDADE, :PESID)';
+  FQuery.Close;
+  FQuery.SQL.Text := FTextoSQL;
+  FQuery.ParamByName('DATA').AsString := ConvData(Value.Data, True);
+  FQuery.ParamByName('QUANTIDADE').AsCurrency := Value.Quantidade;
+  FQuery.ParamByName('PESID').AsInteger := Value.PesId;
+  FQuery.ExecSQL;
+
+end;
+
+procedure TDataModule1.GravarPessoa(const Value: IPessoa);
+begin
+  FTextoSQL :=
+    'INSERT INTO BS_PESSOA(PES_NOME, PES_DATANASC, PES_TIPOSANG) values (:NOME, :DATANASC, :TIPOSANGUE)';
+  FQuery.Close;
+  FQuery.SQL.Text := FTextoSQL;
+  FQuery.ParamByName('NOME').AsString := AnsiUpperCase(Value.Nome);
+  FQuery.ParamByName('DATANASC').AsString := ConvData(Value.DataNasc, True);
+  FQuery.ParamByName('TIPOSANGUE').AsString := Value.TipoSang;
+
+  FQuery.ExecSQL;
 end;
 
 end.

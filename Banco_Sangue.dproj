@@ -109,6 +109,8 @@
         </DCCReference>
         <DCCReference Include="Src\uFuncoes.pas"/>
         <DCCReference Include="Controller\uConfigClasse.pas"/>
+        <DCCReference Include="Controller\uPessoaClasse.pas"/>
+        <DCCReference Include="Controller\uDoacaoClasse.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

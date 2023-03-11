@@ -7,7 +7,9 @@ uses
   uBaseForm in 'Base\uBaseForm.pas' {fBaseForm},
   uBaseFormCadastro in 'Base\uBaseFormCadastro.pas' {fBaseFormCadastro},
   uFuncoes in 'Src\uFuncoes.pas',
-  uConfigClasse in 'Controller\uConfigClasse.pas';
+  uConfigClasse in 'Controller\uConfigClasse.pas',
+  uPessoaClasse in 'Controller\uPessoaClasse.pas',
+  uDoacaoClasse in 'Controller\uDoacaoClasse.pas';
 
 {$R *.res}
 

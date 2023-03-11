@@ -15,7 +15,19 @@ function Pergunta(const ATitulo, ATexto: string): boolean;
 procedure DesabilitaComponentes(Tela: TForm; Habilita: boolean = False;
   WParent: TWinControl = nil);
 
+function ConvData(Data: TDateTime; DataHora: boolean = False): string;
+
 implementation
+
+function ConvData(Data: TDateTime; DataHora: boolean = False): string;
+begin
+  case DataHora of
+    True:
+      Result := FormatDateTime('yyyy-mm-ddThh:nn:ss', Data);
+    False:
+      Result := FormatDateTime('yyyy-mm-dd', Data);
+  end;
+end;
 
 function Pergunta(const ATitulo, ATexto: string): boolean;
 begin
