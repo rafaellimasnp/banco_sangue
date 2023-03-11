@@ -6,7 +6,7 @@ uses
   SysUtils, Classes, StrUtils, Winapi.Windows, Winapi.ShellApi, IniFiles,
   Forms, JPEG, Graphics, Winapi.WinSvc, System.Win.Registry, Winapi.Messages,
   Winapi.winsock, Dialogs, Winapi.TlHelp32, DateUtils, IdHashMessageDigest,
-  IdHash, DB, DBGrids, Grids,
+  IdHash, DB, DBGrids, Grids, scControls, scCalendar,
   Math, StdCtrls, Mask, Consts,
   Controls, Variants, System.Win.ComObj, Winapi.ActiveX, DBCtrls, ExtCtrls,
   Winapi.NB30, Buttons, ZLib, Winapi.PsAPI;
@@ -45,7 +45,7 @@ function ConvData(Data: TDateTime; DataHora: boolean = False): string;
 begin
   case DataHora of
     True:
-      Result := FormatDateTime('yyyy-mm-ddThh:nn:ss', Data);
+      Result := FormatDateTime('yyyy-mm-ddthh:nn:ss', Data);
     False:
       Result := FormatDateTime('yyyy-mm-dd', Data);
   end;
@@ -111,6 +111,13 @@ begin
           TMaskEdit(Components[xx]).Enabled := Habilita;
           TMaskEdit(Components[xx]).TabStop := Habilita;
         end;
+
+        if Components[xx] is TscDateEdit then
+        begin
+          TscDateEdit(Components[xx]).Enabled := Habilita;
+          TscDateEdit(Components[xx]).TabStop := Habilita;
+        end;
+
         if Components[xx] is TDBCheckBox then
         begin
           TDBCheckBox(Components[xx]).Enabled := Habilita;

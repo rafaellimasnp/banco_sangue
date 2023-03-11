@@ -6,22 +6,22 @@ inherited fPesqPessoas: TfPesqPessoas
   TextHeight = 13
   inherited pnBotoes: TPanel
     Width = 612
-    ExplicitLeft = 0
-    ExplicitWidth = 750
+    ExplicitWidth = 612
     DesignSize = (
       612
       61)
     inherited btnSair: TBitBtn
       Left = 518
-      ExplicitLeft = 656
+      ExplicitLeft = 518
     end
     inherited StaticText1: TStaticText
       Left = 583
-      ExplicitLeft = 721
+      ExplicitLeft = 583
     end
   end
   inherited StatusBar1: TStatusBar
     Width = 612
+    ExplicitWidth = 612
   end
   inherited DBGrid1: TDBGrid
     Width = 612
@@ -51,10 +51,14 @@ inherited fPesqPessoas: TfPesqPessoas
         Expanded = False
         FieldName = 'PES_TIPOSANG'
         Title.Caption = 'Tipo Sangu'#237'neo'
+        Width = 105
         Visible = True
       end>
   end
   inherited sqlViewTabela: TFDQuery
     Connection = dmDados.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM BS_PESSOA'
+      '')
   end
 end

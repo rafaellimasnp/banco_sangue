@@ -28,10 +28,6 @@ type
     StaticText2: TStaticText;
     btnExcluir: TBitBtn;
     sqlViewTabela: TFDQuery;
-    sqlViewTabelaPES_ID: TIntegerField;
-    sqlViewTabelaPES_NOME: TStringField;
-    sqlViewTabelaPES_DATANASC: TSQLTimeStampField;
-    sqlViewTabelaPES_TIPOSANG: TStringField;
     dsViewTabela: TDataSource;
     StatusBar1: TStatusBar;
     DBGrid1: TDBGrid;
@@ -71,6 +67,9 @@ type
     property CampoDescricao: String read FCampoDescricao;
     property DataSet: TDataSet read FDataSet write FDataSet;
     property TextoDigitado: string read FTextoDigitado write SetTextoDigitado;
+
+    function Execute(): Integer; overload;
+    function Execute(const ATextoDigitado: string): Integer; overload;
 
     constructor Create();
     destructor Destroy(); override;
@@ -116,6 +115,7 @@ end;
 constructor TfBaseFormPesquisa.Create;
 begin
   inherited Create();
+  FDataSet :=  dsViewTabela.DataSet;
 end;
 
 procedure TfBaseFormPesquisa.DBGrid1DblClick(Sender: TObject);
@@ -132,6 +132,21 @@ end;
 procedure TfBaseFormPesquisa.DoEscolha(const AId: Integer);
 begin
 
+end;
+
+function TfBaseFormPesquisa.Execute(const ATextoDigitado: string): Integer;
+begin
+  Result := 0;
+  Self.SetTextoDigitado(ATextoDigitado);
+  _FiltraTabela();
+  if (Self.ShowModal() = mrOK) then
+    Result := StrToInt(FDataSet.FieldByName(FCampoId).AsString);
+
+end;
+
+function TfBaseFormPesquisa.Execute: Integer;
+begin
+  Result := Self.Execute(EmptyStr);
 end;
 
 procedure TfBaseFormPesquisa.FormActivate(Sender: TObject);

@@ -75,6 +75,8 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -143,6 +145,18 @@
                 <Source>
                     <Source Name="MainSource">Banco_Sangue.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Rafael Lima\Downloads\fortesreport-ce-master\fortesreport-ce-master\Binary\LibD26\dclfrce.bpl">File C:\Users\Rafael Lima\Downloads\fortesreport-ce-master\fortesreport-ce-master\Binary\LibD26\dclfrce.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxPivotGridOLAPRS26.bpl">ExpressPivotGrid OLAP by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfrxTee26.bpl">FastReport 6.0 Tee Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfsTee26.bpl">FastScript 1.9 Tee Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfrxBDE26.bpl">File C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfrxBDE26.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfsBDE26.bpl">File C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfsBDE26.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfrxIBX26.bpl">FastReport 6.0 IBX Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD26\dclfsIBX26.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Debug\Banco_Sangue.exe" Configuration="Debug" Class="ProjectOutput">

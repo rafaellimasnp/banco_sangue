@@ -25,8 +25,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -421
-    ExplicitWidth = 974
     DesignSize = (
       592
       61)
@@ -468,7 +466,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
-      ExplicitLeft = 880
     end
     object StaticText1: TStaticText
       Left = 563
@@ -488,7 +485,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       Font.Quality = fqClearTypeNatural
       ParentFont = False
       TabOrder = 5
-      ExplicitLeft = 945
     end
     object btnVisualizar: TBitBtn
       Left = 191
@@ -800,8 +796,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
     ParentShowHint = False
     ShowHint = True
     SimplePanel = True
-    ExplicitTop = 327
-    ExplicitWidth = 500
   end
   object DBGrid1: TDBGrid
     Left = 0
@@ -829,29 +823,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
       'SELECT * FROM BS_PESSOA')
     Left = 256
     Top = 128
-    object sqlViewTabelaPES_ID: TIntegerField
-      FieldName = 'PES_ID'
-      Origin = 'PES_ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object sqlViewTabelaPES_NOME: TStringField
-      FieldName = 'PES_NOME'
-      Origin = 'PES_NOME'
-      Required = True
-      Size = 100
-    end
-    object sqlViewTabelaPES_DATANASC: TSQLTimeStampField
-      FieldName = 'PES_DATANASC'
-      Origin = 'PES_DATANASC'
-      Required = True
-    end
-    object sqlViewTabelaPES_TIPOSANG: TStringField
-      FieldName = 'PES_TIPOSANG'
-      Origin = 'PES_TIPOSANG'
-      FixedChar = True
-      Size = 2
-    end
   end
   object dsViewTabela: TDataSource
     DataSet = sqlViewTabela

@@ -16,7 +16,6 @@ uses
 type
   TfPesqPessoas = class(TfBaseFormPesquisa)
   private
-    FCadPessoa: TfCadPessoa;
     procedure AplicarAcessos(); override;
     procedure _FiltraTabela(); override;
     function FiltraPessoas(BuscarExato: boolean = false): boolean;
@@ -40,14 +39,14 @@ implementation
 procedure TfPesqPessoas.Alterar;
 begin
   inherited;
-  FCadPessoa := TfCadPessoa.Create();
+  FCadPessoa := TfCadPessoa.Create(sqlviewtabela.fieldbyname('PES_ID')
+    .AsInteger, false);
   try
     FCadPessoa.Execute;
     Self._FiltraTabela();
   finally
     FreeAndNil(FCadPessoa);
   end;
-
 end;
 
 procedure TfPesqPessoas.AplicarAcessos;
@@ -59,7 +58,7 @@ end;
 procedure TfPesqPessoas.AtivarInativar;
 begin
   inherited;
-
+  ShowMessage('Usuário sem acesso para excluir');
 end;
 
 constructor TfPesqPessoas.Create;
@@ -91,13 +90,14 @@ begin
     if Length(TextoDigitado) > 0 then
       TextoSQL := TextoSQL + 'AND (' + Campo + ' LIKE ''%' + TextoDigitado +
         '%'')' + #13;
-    TextoSQL := TextoSQL + ' ORDER BY ' + Campo;
 
-    ZListaSQL(sqlViewTabela, TextoSQL);
+    TextoSQL := TextoSQL + ' ORDER BY PES_ID, ' + Campo;
+
+    ZListaSQL(sqlviewtabela, TextoSQL);
 
     if BuscarExato then
-      EncontrouRegExato := (sqlViewTabela.RecordCount = 1) and
-        sqlViewTabela.FieldByName(Campo).AsString.Equals(TextoDigitado)
+      EncontrouRegExato := (sqlviewtabela.RecordCount = 1) and
+        sqlviewtabela.fieldbyname(Campo).AsString.Equals(TextoDigitado)
     else
       EncontrouRegExato := false;
     Result := EncontrouRegExato;
@@ -110,8 +110,8 @@ begin
   inherited;
   FCadPessoa := TfCadPessoa.Create();
   try
-    FCadPessoa.Execute;
-    Self._FiltraTabela();
+    if FCadPessoa.Execute then
+      Self._FiltraTabela();
   finally
     FreeAndNil(FCadPessoa);
   end;
@@ -121,6 +121,13 @@ end;
 procedure TfPesqPessoas.Visualizar;
 begin
   inherited;
+  FCadPessoa := TfCadPessoa.Create(sqlviewtabela.fieldbyname('PES_ID').AsInteger, True);
+  try
+    FCadPessoa.Execute;
+    Self._FiltraTabela();
+  finally
+    FreeAndNil(FCadPessoa);
+  end;
 
 end;
 

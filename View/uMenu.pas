@@ -37,7 +37,7 @@ implementation
 procedure TfMenu.Pessoa1Click(Sender: TObject);
 begin
   fPesqPessoas := TFPesqPessoas.Create();
-  fPesqPessoas.ShowModal;
+  fPesqPessoas.Execute;
   FreeAndNil(fPesqPessoas);
 end;
 

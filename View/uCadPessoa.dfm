@@ -9,32 +9,45 @@ inherited fCadPessoa: TfCadPessoa
   object lbNome: TLabel [0]
     Left = 16
     Top = 18
-    Width = 34
+    Width = 33
     Height = 16
     Caption = 'Nome'
   end
   object lbDataNasc: TLabel [1]
     Left = 16
     Top = 48
-    Width = 59
+    Width = 57
     Height = 16
     Caption = 'Data Nasc'
   end
   object lbTipoSang: TLabel [2]
     Left = 16
     Top = 78
-    Width = 88
+    Width = 89
     Height = 16
     Caption = 'Tipo Sangu'#237'neo'
   end
   inherited Panel1: TPanel
     Left = 411
     Height = 115
+    TabOrder = 3
     ExplicitLeft = 411
     ExplicitHeight = 115
     DesignSize = (
       95
       115)
+    inherited btnSair: TBitBtn
+      TabOrder = 3
+    end
+    inherited StaticText1: TStaticText
+      TabOrder = 0
+    end
+    inherited btnGravar: TBitBtn
+      TabOrder = 2
+    end
+    inherited StaticText2: TStaticText
+      TabOrder = 1
+    end
   end
   object edNome: TEdit
     Left = 110
@@ -42,7 +55,7 @@ inherited fCadPessoa: TfCadPessoa
     Width = 267
     Height = 24
     MaxLength = 100
-    TabOrder = 1
+    TabOrder = 0
   end
   object cbTipoSang: TComboBox
     Left = 110
@@ -59,7 +72,7 @@ inherited fCadPessoa: TfCadPessoa
       'O+'
       'O-')
   end
-  object scDateEdit1: TscDateEdit
+  object edDataNasc: TscDateEdit
     Left = 110
     Top = 42
     Width = 131
@@ -129,6 +142,6 @@ inherited fCadPessoa: TfCadPessoa
     FrameColor = clBtnShadow
     FrameActiveColor = clHighlight
     MaxLength = 10
-    TabOrder = 3
+    TabOrder = 1
   end
 end

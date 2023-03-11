@@ -28,7 +28,6 @@ object fBaseFormCadastro: TfBaseFormCadastro
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 632
     DesignSize = (
       95
       478)
@@ -147,7 +146,6 @@ object fBaseFormCadastro: TfBaseFormCadastro
       ModalResult = 2
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 7
     end
     object StaticText1: TStaticText
       Left = 64
@@ -166,7 +164,6 @@ object fBaseFormCadastro: TfBaseFormCadastro
       Font.Quality = fqClearTypeNatural
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 71
     end
     object btnGravar: TBitBtn
       Left = 0
@@ -284,7 +281,6 @@ object fBaseFormCadastro: TfBaseFormCadastro
       ParentFont = False
       TabOrder = 0
       OnClick = btnGravarClick
-      ExplicitLeft = 7
     end
     object StaticText2: TStaticText
       Left = 69
@@ -303,7 +299,6 @@ object fBaseFormCadastro: TfBaseFormCadastro
       Font.Quality = fqClearTypeNatural
       ParentFont = False
       TabOrder = 3
-      ExplicitLeft = 76
     end
   end
 end

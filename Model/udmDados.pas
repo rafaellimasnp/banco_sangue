@@ -14,18 +14,6 @@ uses
 type
   TdmDados = class(TDataModule)
     FDConnection: TFDConnection;
-    sqlPessoas: TFDQuery;
-    dsPessoas: TDataSource;
-    sqlPessoasPES_ID: TIntegerField;
-    sqlPessoasPES_NOME: TStringField;
-    sqlPessoasPES_DATANASC: TSQLTimeStampField;
-    sqlPessoasPES_TIPOSANG: TStringField;
-    sqlDoacoes: TFDQuery;
-    dsDoacoes: TDataSource;
-    sqlDoacoesDOA_ID: TIntegerField;
-    sqlDoacoesDOA_DATA: TSQLTimeStampField;
-    sqlDoacoesDOA_QTDE: TFMTBCDField;
-    sqlDoacoesPES_ID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -39,7 +27,10 @@ type
     FNomeArquivoINI: string;
     procedure ConectarBanco();
     procedure GravarPessoa(const Value: IPessoa);
+    function CarregarDadosPessoa(const AID: Int64): IPessoa;
     procedure GravarDoacao(const Value: IDoacao);
+    function GetPessoaCadastrada(const ANome: string;
+      const ADataNasc: TDateTime): Boolean;
     procedure ZListaSQL(const AQuery: TFDQuery; const ATextoSQL: string);
   end;
 
@@ -67,6 +58,34 @@ begin
 
   finally
     LArquivoINI.Free;
+  end;
+
+end;
+
+function TdmDados.CarregarDadosPessoa(const AID: Int64): IPessoa;
+var
+  LQuery: TFDQuery;
+begin
+  try
+    LQuery := TFDQuery.Create(nil);
+    LQuery.Connection := Self.FDConnection;
+    ZListaSQL(LQuery, 'SELECT * FROM BS_PESSOA WHERE PES_ID =' + IntToStr(AID));
+
+    Result := TPessoa.Create();
+
+    Result.Exists := False;
+
+    if LQuery.RecordCount > 0 then
+    begin
+      Result.Id := LQuery.FieldByName('PES_ID').AsInteger;
+      Result.Nome := LQuery.FieldByName('PES_NOME').AssTring;
+      Result.DataNasc := LQuery.FieldByName('PES_DATANASC').AsDateTime;
+      Result.TipoSang := LQuery.FieldByName('PES_TIPOSANG').AssTring;
+      Result.Exists := True;
+    end;
+
+  finally
+    FreeAndNil(LQuery);
   end;
 
 end;
@@ -105,13 +124,24 @@ begin
   ConectarBanco();
 end;
 
+function TdmDados.GetPessoaCadastrada(const ANome: string;
+  const ADataNasc: TDateTime): Boolean;
+begin
+
+  ZListaSQL(FQuery, 'SELECT * FROM BS_PESSOA WHERE PES_NOME = ''' + ANome +
+    ''' AND PES_DATANASC = ''' + ConvData(ADataNasc) + '''');
+
+  Result := FQuery.RecordCount > 0;
+
+end;
+
 procedure TdmDados.GravarDoacao(const Value: IDoacao);
 begin
   FTextoSQL :=
     'INSERT INTO BS_DOACAO(DOA_DATA, DOA_QTDE, PES_ID) values (:DATA, :QUANTIDADE, :PESID)';
   FQuery.Close;
   FQuery.SQL.Text := FTextoSQL;
-  FQuery.ParamByName('DATA').AsString := ConvData(Value.Data, True);
+  FQuery.ParamByName('DATA').AssTring := ConvData(Value.Data, True);
   FQuery.ParamByName('QUANTIDADE').AsCurrency := Value.Quantidade;
   FQuery.ParamByName('PESID').AsInteger := Value.PesId;
   FQuery.ExecSQL;
@@ -122,11 +152,20 @@ procedure TdmDados.GravarPessoa(const Value: IPessoa);
 begin
   FTextoSQL :=
     'INSERT INTO BS_PESSOA(PES_NOME, PES_DATANASC, PES_TIPOSANG) values (:NOME, :DATANASC, :TIPOSANGUE)';
+
+  if Value.Exists then
+    FTextoSQL := 'UPDATE BS_PESSOA   ' + sLineBreak +
+      '    SET PES_NOME = :NOME ,' + sLineBreak +
+      '    PES_DATANASC = :DATANASC ,' + sLineBreak +
+      '    PES_TIPOSANG = :TIPOSANGUE  WHERE PES_ID = :ID ';
+
   FQuery.Close;
   FQuery.SQL.Text := FTextoSQL;
-  FQuery.ParamByName('NOME').AsString := AnsiUpperCase(Value.Nome);
-  FQuery.ParamByName('DATANASC').AsString := ConvData(Value.DataNasc, True);
-  FQuery.ParamByName('TIPOSANGUE').AsString := Value.TipoSang;
+  FQuery.ParamByName('NOME').AssTring := AnsiUpperCase(Value.Nome);
+  FQuery.ParamByName('DATANASC').AssTring := ConvData(Value.DataNasc);
+  FQuery.ParamByName('TIPOSANGUE').AssTring := Value.TipoSang;
+  if Value.Exists then
+    FQuery.ParamByName('ID').AssTring := IntToStr(Value.Id);
 
   FQuery.ExecSQL;
 end;

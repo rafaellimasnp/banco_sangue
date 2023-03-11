@@ -3,8 +3,10 @@ unit uBaseFormCadastro;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, uBaseForm, uFuncoes, Vcl.ExtCtrls;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, uBaseForm,
+  uFuncoes, Vcl.ExtCtrls;
 
 type
   TfBaseFormCadastro = class(TfBaseForm)
@@ -33,12 +35,14 @@ type
     property Id: Int64 read FId;
     property EhVisualizar: Boolean read FEhVisualizar write SetEhVisualizar;
     property EhNovoCadastro: Boolean read FEhNovoCadastro;
-    property ConfirmarCadastro: Boolean read FConfirmarCadastro write FConfirmarCadastro;
+    property ConfirmarCadastro: Boolean read FConfirmarCadastro
+      write FConfirmarCadastro;
     function Execute(): Boolean; virtual;
 
     constructor Create(); overload;
     constructor Create(const AId: Int64); overload;
-    constructor Create(const AId: Int64; const AEhVisualizar: Boolean); overload;
+    constructor Create(const AId: Int64; const AEhVisualizar: Boolean);
+      overload;
   end;
 
 var
@@ -48,20 +52,20 @@ implementation
 
 {$R *.dfm}
 
-
 procedure TfBaseFormCadastro.btnGravarClick(Sender: TObject);
 begin
   if not btnGravar.Enabled then
     Exit();
 
-  if( btnGravar.CanFocus() ) then
+  if (btnGravar.CanFocus()) then
     btnGravar.SetFocus;
 
   btnGravar.Enabled := False;
   try
     if Self.CamposEmBranco() then
       Abort();
-    if FConfirmarCadastro and not Pergunta('Gravar', 'Deseja realmente gravar?') then
+    if FConfirmarCadastro and not Pergunta('Gravar', 'Deseja realmente gravar?')
+    then
       Abort();
     Self.Gravar();
     Self.ModalResult := mrOK;
@@ -86,7 +90,8 @@ begin
   Result := False;
 end;
 
-constructor TfBaseFormCadastro.Create(const AId: Int64; const AEhVisualizar: Boolean);
+constructor TfBaseFormCadastro.Create(const AId: Int64;
+  const AEhVisualizar: Boolean);
 begin
   inherited Create();
   FId := AId;
@@ -98,19 +103,19 @@ end;
 
 function TfBaseFormCadastro.Execute: Boolean;
 begin
-  Self.PreValidacao();
   Self.PreencheDados();
-
   Result := Self.ShowModal() = mrOK;
 end;
 
-procedure TfBaseFormCadastro.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TfBaseFormCadastro.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
 begin
   Self.ConfirmarSaida := Self.ConfirmarSaida and not FEhVisualizar;
   inherited;
 end;
 
-procedure TfBaseFormCadastro.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfBaseFormCadastro.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   inherited;
   if Key = VK_F2 then

@@ -21,10 +21,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMenu, fMenu);
   Application.CreateForm(TdmDados, dmDados);
-  Application.CreateForm(TfBaseForm, fBaseForm);
-  Application.CreateForm(TfBaseFormCadastro, fBaseFormCadastro);
-  Application.CreateForm(TfCadPessoa, fCadPessoa);
-  Application.CreateForm(TfBaseFormPesquisa, fBaseFormPesquisa);
-  Application.CreateForm(TfPesqPessoas, fPesqPessoas);
   Application.Run;
 end.
