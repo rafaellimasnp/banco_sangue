@@ -140,7 +140,7 @@ begin
   Self.SetTextoDigitado(ATextoDigitado);
   _FiltraTabela();
   if (Self.ShowModal() = mrOK) then
-    Result := StrToInt(FDataSet.FieldByName(FCampoId).AsString);
+    Result := StrToInt(FDataSet.FieldByName(FDataSet.Fields[0].FieldName).AsString);
 
 end;
 

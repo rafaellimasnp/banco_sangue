@@ -43,7 +43,7 @@ implementation
 procedure TfPesqDoacao.Alterar;
 begin
   inherited;
-  FCadDoacao := TfCadDoacao.Create(sqlviewtabela.fieldbyname('DOA_ID')
+  FCadDoacao := TfCadDoacao.Create(sqlViewTabela.fieldbyname('DOA_ID')
     .AsInteger, false);
   try
     FCadDoacao.Execute;
@@ -61,7 +61,7 @@ end;
 
 destructor TfPesqDoacao.Destroy;
 begin
-  //
+
   inherited;
 end;
 
@@ -71,9 +71,8 @@ begin
   If MessageDlg('Você tem certeza que gostaria de EXCLUIR esse registro?',
     mtConfirmation, [mbyes, mbno], 0) = mryes then
   begin
-
-    // voltar aqui
-
+    dmDados.DeletarDoacao(sqlViewTabela.fieldbyname('DOA_ID').AsInteger);
+    _FiltraTabela();
   end;
 
 end;
@@ -100,11 +99,11 @@ begin
 
     TextoSQL := TextoSQL + ' ORDER BY DOA_ID, ' + Campo;
 
-    ZListaSQL(sqlviewtabela, TextoSQL);
+    ZListaSQL(sqlViewTabela, TextoSQL);
 
     if BuscarExato then
-      EncontrouRegExato := (sqlviewtabela.RecordCount = 1) and
-        sqlviewtabela.fieldbyname(Campo).AsString.Equals(TextoDigitado)
+      EncontrouRegExato := (sqlViewTabela.RecordCount = 1) and
+        sqlViewTabela.fieldbyname(Campo).AsString.Equals(TextoDigitado)
     else
       EncontrouRegExato := false;
     Result := EncontrouRegExato;
@@ -127,7 +126,7 @@ end;
 procedure TfPesqDoacao.Visualizar;
 begin
   inherited;
-  FCadDoacao := TfCadDoacao.Create(sqlviewtabela.fieldbyname('DOA_ID')
+  FCadDoacao := TfCadDoacao.Create(sqlViewTabela.fieldbyname('DOA_ID')
     .AsInteger, True);
   try
     FCadDoacao.Execute;

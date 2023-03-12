@@ -28,9 +28,11 @@ type
     procedure ConectarBanco();
     procedure GravarPessoa(const Value: IPessoa);
     procedure DeletarPessoa(const AID: Int64);
+    procedure DeletarDoacao(const AID: Int64);
     function CarregarDadosPessoa(const AID: Int64): IPessoa;
     procedure GravarDoacao(const Value: IDoacao);
     function CarregarDadosDoacao(const AID: Int64): IDoacao;
+    function DataUltimaDoacao(const APES_ID: Int64): IDoacao;
     function GetPessoaCadastrada(const ANome: string;
       const ADataNasc: TDateTime): Boolean;
     procedure ZListaSQL(const AQuery: TFDQuery; const ATextoSQL: string);
@@ -153,6 +155,27 @@ begin
   ConectarBanco();
 end;
 
+function TdmDados.DataUltimaDoacao(const APES_ID: Int64): IDoacao;
+begin
+  ZListaSQL(FQuery,
+    'SELECT TOP 1 DOA_DATA, DOA_ID FROM BS_DOACAO WHERE PES_ID = ' +
+    IntToStr(APES_ID));
+
+  if FQuery.RecordCount > 0 then
+    Result := CarregarDadosDoacao(FQuery.FieldByName('DOA_ID').AsInteger)
+  else
+    Result := CarregarDadosDoacao(0);
+
+end;
+
+procedure TdmDados.DeletarDoacao(const AID: Int64);
+begin
+  FTextoSQL := 'DELETE FROM BS_DOACAO WHERE DOA_ID = ' + IntToStr(AID);
+  FQuery.Close;
+  FQuery.SQL.Text := FTextoSQL;
+  FQuery.ExecSQL;
+end;
+
 procedure TdmDados.DeletarPessoa(const AID: Int64);
 begin
   FTextoSQL := 'DELETE FROM BS_PESSOA WHERE PES_ID = ' + IntToStr(AID);
@@ -175,11 +198,21 @@ procedure TdmDados.GravarDoacao(const Value: IDoacao);
 begin
   FTextoSQL :=
     'INSERT INTO BS_DOACAO(DOA_DATA, DOA_QTDE, PES_ID) values (:DATA, :QUANTIDADE, :PESID)';
+
+  if Value.Exists then
+    FTextoSQL := 'UPDATE BS_DOACAO   ' + sLineBreak +
+      '    SET DOA_DATA = :DATA ,' + sLineBreak + '    DOA_QTDE = :QUANTIDADE ,'
+      + sLineBreak + '    PES_ID = :PESID  WHERE DOA_ID = :ID ';
+
   FQuery.Close;
   FQuery.SQL.Text := FTextoSQL;
-  FQuery.ParamByName('DATA').AssTring := ConvData(Value.Data) + 'T' + TimeToStr(Now);
+  FQuery.ParamByName('DATA').Value := Value.Data;
   FQuery.ParamByName('QUANTIDADE').AsCurrency := Value.Quantidade;
   FQuery.ParamByName('PESID').AsInteger := Value.PesId;
+
+  if Value.Exists then
+    FQuery.ParamByName('ID').AssTring := IntToStr(Value.Id);
+
   FQuery.ExecSQL;
 
 end;

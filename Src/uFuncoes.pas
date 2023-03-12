@@ -7,7 +7,7 @@ uses
   Forms, JPEG, Graphics, Winapi.WinSvc, System.Win.Registry, Winapi.Messages,
   Winapi.winsock, Dialogs, Winapi.TlHelp32, DateUtils, IdHashMessageDigest,
   IdHash, DB, DBGrids, Grids, scControls, scCalendar,
-  Math, StdCtrls, Mask, Consts,
+  Math, StdCtrls, Mask, Consts, Vcl.ComCtrls,
   Controls, Variants, System.Win.ComObj, Winapi.ActiveX, DBCtrls, ExtCtrls,
   Winapi.NB30, Buttons, ZLib, Winapi.PsAPI;
 
@@ -165,6 +165,13 @@ begin
           TComboBox(Components[xx]).Enabled := Habilita;
           TComboBox(Components[xx]).TabStop := Habilita;
         end;
+
+        if Components[xx] is TDateTimePicker then
+        begin
+          TDateTimePicker(Components[xx]).Enabled := Habilita;
+          TDateTimePicker(Components[xx]).TabStop := Habilita;
+        end;
+
         if Components[xx] is TDBComboBox then
         begin
           TDBComboBox(Components[xx]).Enabled := Habilita;

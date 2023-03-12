@@ -6,15 +6,22 @@ inherited fPesqDoacao: TfPesqDoacao
   TextHeight = 13
   inherited pnBotoes: TPanel
     Width = 606
+    ExplicitWidth = 606
     inherited btnSair: TBitBtn
       Left = 512
+      ExplicitLeft = 512
     end
     inherited StaticText1: TStaticText
       Left = 577
+      ExplicitLeft = 577
+    end
+    inherited btnExcluir: TBitBtn
+      Visible = True
     end
   end
   inherited StatusBar1: TStatusBar
     Width = 606
+    ExplicitWidth = 606
   end
   inherited DBGrid1: TDBGrid
     Width = 606

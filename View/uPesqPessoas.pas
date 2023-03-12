@@ -18,7 +18,6 @@ type
   private
     procedure AplicarAcessos(); override;
     procedure _FiltraTabela(); override;
-    function FiltraPessoas(BuscarExato: boolean = false): boolean;
     procedure Inserir(); override;
     procedure Alterar(); override;
     procedure Excluir(); override;
@@ -26,6 +25,7 @@ type
   public
     Constructor Create;
     destructor Destroy; override;
+    function FiltraPessoas(BuscarExato: boolean = false): boolean;
   end;
 
 var
@@ -86,6 +86,7 @@ var
 begin
   with dmDados do
   begin
+    Campo := 'PES_NOME';
     StatusBar1.SimpleText := TextoDigitado;
     TextoSQL := 'SELECT * FROM BS_PESSOA WHERE PES_ID >= 0' + #13;
 
