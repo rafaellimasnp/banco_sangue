@@ -819,8 +819,6 @@ object fBaseFormPesquisa: TfBaseFormPesquisa
     OnDblClick = DBGrid1DblClick
   end
   object sqlViewTabela: TFDQuery
-    SQL.Strings = (
-      'SELECT * FROM BS_PESSOA')
     Left = 256
     Top = 128
   end

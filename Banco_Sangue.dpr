@@ -12,7 +12,9 @@ uses
   uDoacaoClasse in 'Controller\uDoacaoClasse.pas',
   uCadPessoa in 'View\uCadPessoa.pas' {fCadPessoa},
   uBaseFormPesquisa in 'Base\uBaseFormPesquisa.pas' {fBaseFormPesquisa},
-  uPesqPessoas in 'View\uPesqPessoas.pas' {fPesqPessoas};
+  uPesqPessoas in 'View\uPesqPessoas.pas' {fPesqPessoas},
+  uPesqDoacao in 'View\uPesqDoacao.pas' {fPesqDoacao},
+  uCadDoacao in 'View\uCadDoacao.pas' {fCadDoacao};
 
 {$R *.res}
 
@@ -21,5 +23,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMenu, fMenu);
   Application.CreateForm(TdmDados, dmDados);
+  Application.CreateForm(TfPesqDoacao, fPesqDoacao);
+  Application.CreateForm(TfCadDoacao, fCadDoacao);
   Application.Run;
 end.

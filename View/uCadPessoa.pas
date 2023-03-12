@@ -115,7 +115,7 @@ end;
 
 destructor TfCadPessoa.destroy;
 begin
-
+  inherited;
 end;
 
 procedure TfCadPessoa.Gravar;

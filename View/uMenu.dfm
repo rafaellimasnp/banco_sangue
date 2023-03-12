@@ -36,6 +36,7 @@ object fMenu: TfMenu
       Caption = 'Processo'
       object Doao1: TMenuItem
         Caption = '&Doa'#231#227'o'
+        OnClick = Doao1Click
       end
     end
     object Relatrio1: TMenuItem

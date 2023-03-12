@@ -125,6 +125,14 @@
             <Form>fPesqPessoas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="View\uPesqDoacao.pas">
+            <Form>fPesqDoacao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uCadDoacao.pas">
+            <Form>fCadDoacao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -30,6 +30,7 @@ type
     procedure DeletarPessoa(const AID: Int64);
     function CarregarDadosPessoa(const AID: Int64): IPessoa;
     procedure GravarDoacao(const Value: IDoacao);
+    function CarregarDadosDoacao(const AID: Int64): IDoacao;
     function GetPessoaCadastrada(const ANome: string;
       const ADataNasc: TDateTime): Boolean;
     procedure ZListaSQL(const AQuery: TFDQuery; const ATextoSQL: string);
@@ -59,6 +60,33 @@ begin
 
   finally
     LArquivoINI.Free;
+  end;
+
+end;
+
+function TdmDados.CarregarDadosDoacao(const AID: Int64): IDoacao;
+var
+  LQuery: TFDQuery;
+begin
+  try
+    LQuery := TFDQuery.Create(nil);
+    LQuery.Connection := Self.FDConnection;
+    ZListaSQL(LQuery, 'SELECT * FROM BS_DOACAO WHERE DOA_ID =' + IntToStr(AID));
+    Result := TDoacao.Create();
+
+    Result.Exists := False;
+
+    if LQuery.RecordCount > 0 then
+    begin
+      Result.Id := LQuery.FieldByName('DOA_ID').AsInteger;
+      Result.Data := LQuery.FieldByName('DOA_DATA').AsDateTime;
+      Result.Quantidade := LQuery.FieldByName('DOA_QTDE').AsCurrency;
+      Result.PesId := LQuery.FieldByName('PES_ID').AsInteger;
+      Result.Exists := True;
+    end;
+
+  finally
+    FreeAndNil(LQuery);
   end;
 
 end;
@@ -149,7 +177,7 @@ begin
     'INSERT INTO BS_DOACAO(DOA_DATA, DOA_QTDE, PES_ID) values (:DATA, :QUANTIDADE, :PESID)';
   FQuery.Close;
   FQuery.SQL.Text := FTextoSQL;
-  FQuery.ParamByName('DATA').AssTring := ConvData(Value.Data, True);
+  FQuery.ParamByName('DATA').AssTring := ConvData(Value.Data) + 'T' + TimeToStr(Now);
   FQuery.ParamByName('QUANTIDADE').AsCurrency := Value.Quantidade;
   FQuery.ParamByName('PESID').AsInteger := Value.PesId;
   FQuery.ExecSQL;

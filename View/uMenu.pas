@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, uPesqPessoas;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, uPesqPessoas, uPesqDoacao;
 
 type
   TfMenu = class(TForm)
@@ -21,6 +21,7 @@ type
     N1: TMenuItem;
     Configuraes1: TMenuItem;
     procedure Pessoa1Click(Sender: TObject);
+    procedure Doao1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +34,13 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfMenu.Doao1Click(Sender: TObject);
+begin
+  fPesqDoacao := TfPesqDoacao.Create();
+  fPesqDoacao.Execute;
+  FreeAndNil(fPesqDoacao);
+end;
 
 procedure TfMenu.Pessoa1Click(Sender: TObject);
 begin
