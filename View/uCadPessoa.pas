@@ -44,6 +44,7 @@ function TfCadPessoa.CamposEmBranco: Boolean;
 var
   Idade: integer;
 begin
+  Result := False;
   if dmDados.GetPessoaCadastrada(edNome.Text, edDataNasc.Date) then
   begin
     Result := True;

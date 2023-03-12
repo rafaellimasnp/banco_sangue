@@ -9,21 +9,21 @@ inherited fCadPessoa: TfCadPessoa
   object lbNome: TLabel [0]
     Left = 16
     Top = 18
-    Width = 33
+    Width = 34
     Height = 16
     Caption = 'Nome'
   end
   object lbDataNasc: TLabel [1]
     Left = 16
     Top = 48
-    Width = 57
+    Width = 59
     Height = 16
     Caption = 'Data Nasc'
   end
   object lbTipoSang: TLabel [2]
     Left = 16
     Top = 78
-    Width = 89
+    Width = 88
     Height = 16
     Caption = 'Tipo Sangu'#237'neo'
   end

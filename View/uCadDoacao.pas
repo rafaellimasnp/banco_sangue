@@ -90,6 +90,7 @@ end;
 
 function TfCadDoacao.CamposEmBranco: Boolean;
 begin
+  Result := False;
   if (edQuantidade.Value <= 0) or (edQuantidade.Value > 1000) then
   begin
     Result := True;
