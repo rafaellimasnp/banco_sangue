@@ -14,7 +14,8 @@ uses
   uBaseFormPesquisa in 'Base\uBaseFormPesquisa.pas' {fBaseFormPesquisa},
   uPesqPessoas in 'View\uPesqPessoas.pas' {fPesqPessoas},
   uPesqDoacao in 'View\uPesqDoacao.pas' {fPesqDoacao},
-  uCadDoacao in 'View\uCadDoacao.pas' {fCadDoacao};
+  uCadDoacao in 'View\uCadDoacao.pas' {fCadDoacao},
+  uFuncoesFS in 'Src\uFuncoesFS.pas' {fFuncoesFS};
 
 {$R *.res}
 
@@ -25,5 +26,6 @@ begin
   Application.CreateForm(TdmDados, dmDados);
   Application.CreateForm(TfPesqDoacao, fPesqDoacao);
   Application.CreateForm(TfCadDoacao, fCadDoacao);
+  Application.CreateForm(TfFuncoesFS, fFuncoesFS);
   Application.Run;
 end.
