@@ -137,6 +137,14 @@
             <Form>fFuncoesFS</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Base\uBaseFormRelatorio.pas">
+            <Form>fBaseFormRelatorio</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uRelDoacoes.pas">
+            <Form>fRelDoacoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

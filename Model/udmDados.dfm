@@ -10,9 +10,24 @@ object dmDados: TdmDados
       'Password=123456'
       'Server=RafaelLima'
       'DriverID=MSSQL')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 16
+  end
+  object sqlRelDoacoes: TFDQuery
+    Connection = FDConnection
+    Left = 168
+    Top = 8
+  end
+  object frxRelDoacoes: TfrxDBDataset
+    UserName = 'frxRelDoacoes'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'PES_TIPOSANG=PES_TIPOSANG'
+      'QTDE=QTDE')
+    DataSet = sqlRelDoacoes
+    BCDToCurrency = False
+    Left = 168
+    Top = 56
   end
 end

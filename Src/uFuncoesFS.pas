@@ -22,11 +22,6 @@ type
   end;
 
   TfFuncoesFS = class(TForm)
-    frxRichObject1: TfrxRichObject;
-    frxDotMatrixExport1: TfrxDotMatrixExport;
-    fsScript1: TfsScript;
-    fsPascal1: TfsPascal;
-    frxBarCodeObject1: TfrxBarCodeObject;
     FastRep3: TfrxReport;
     frxDesigner1: TfrxDesigner;
     procedure FormCreate(Sender: TObject);
@@ -136,9 +131,7 @@ begin
 
   FastRep3.Clear;
   FastRep3.LoadFromFile(CaminhoArquivo);
-  FastRep3.DotMatrixReport := Pos('_MT.fr3', AArquivo) > 0;
 end;
-
 
 procedure TfFuncoesFS.DesignFr3;
 begin

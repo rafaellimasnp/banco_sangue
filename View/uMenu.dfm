@@ -43,12 +43,14 @@ object fMenu: TfMenu
       Caption = 'Relat'#243'rio'
       object Doao2: TMenuItem
         Caption = 'Relat'#243'rio de Doa'#231#245'es'
+        OnClick = Doao2Click
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object Configuraes1: TMenuItem
         Caption = '&Configura'#231#245'es'
+        OnClick = Configuraes1Click
       end
     end
   end

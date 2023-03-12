@@ -15,7 +15,9 @@ uses
   uPesqPessoas in 'View\uPesqPessoas.pas' {fPesqPessoas},
   uPesqDoacao in 'View\uPesqDoacao.pas' {fPesqDoacao},
   uCadDoacao in 'View\uCadDoacao.pas' {fCadDoacao},
-  uFuncoesFS in 'Src\uFuncoesFS.pas' {fFuncoesFS};
+  uFuncoesFS in 'Src\uFuncoesFS.pas' {fFuncoesFS},
+  uBaseFormRelatorio in 'Base\uBaseFormRelatorio.pas' {fBaseFormRelatorio},
+  uRelDoacoes in 'View\uRelDoacoes.pas' {fRelDoacoes};
 
 {$R *.res}
 
@@ -27,5 +29,7 @@ begin
   Application.CreateForm(TfPesqDoacao, fPesqDoacao);
   Application.CreateForm(TfCadDoacao, fCadDoacao);
   Application.CreateForm(TfFuncoesFS, fFuncoesFS);
+  Application.CreateForm(TfBaseFormRelatorio, fBaseFormRelatorio);
+  Application.CreateForm(TfRelDoacoes, fRelDoacoes);
   Application.Run;
 end.

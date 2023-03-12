@@ -9,11 +9,13 @@ uses
   FireDAC.Phys.MSSQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, Dialogs,
   FireDAC.Comp.Client, uConfigClasse, uPessoaClasse, IniFiles, uFuncoes,
-  uDoacaoClasse;
+  uDoacaoClasse, frxClass, frxDBSet;
 
 type
   TdmDados = class(TDataModule)
     FDConnection: TFDConnection;
+    sqlRelDoacoes: TFDQuery;
+    frxRelDoacoes: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
