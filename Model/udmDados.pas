@@ -21,7 +21,7 @@ type
     { Private declarations }
     FQuery: TFDQuery;
     FTextoSQL: string;
-    procedure ConfigurarConexao(const ADataBase, AUserName, AServer,
+    procedure ConfigurarConexao(const ADataBase, AUserName, AServer, ASenha,
       ADriver: String);
     procedure CarregarConfiguracoesINI();
   public
@@ -51,16 +51,17 @@ implementation
 procedure TdmDados.CarregarConfiguracoesINI;
 var
   LArquivoINI: TIniFile;
-  LDataBase, LUserName, LServer, LDriver: string;
+  LDataBase, LUserName, LServer, LSenha, LDriver: string;
 begin
   LArquivoINI := TIniFile.Create(FNomeArquivoINI);
   try
     LDataBase := LArquivoINI.ReadString('Banco', 'Database', EmptyStr);
     LUserName := LArquivoINI.ReadString('Banco', 'User_Name', EmptyStr);
     LServer := LArquivoINI.ReadString('Banco', 'Server', EmptyStr);
+    LSenha := LArquivoINI.ReadString('Banco', 'Password', EmptyStr);
     LDriver := LArquivoINI.ReadString('Banco', 'DriverID', EmptyStr);
 
-    ConfigurarConexao(LDataBase, LUserName, LServer, LDriver);
+    ConfigurarConexao(LDataBase, LUserName, LServer, LSenha, LDriver);
 
   finally
     LArquivoINI.Free;
@@ -138,14 +139,14 @@ begin
 end;
 
 procedure TdmDados.ConfigurarConexao(const ADataBase, AUserName, AServer,
-  ADriver: String);
+  ASenha, ADriver: String);
 begin
   with FDConnection.Params do
   begin
     Clear;
     Add('Database=' + ADataBase);
     Add('User_Name=' + AUserName);
-    Add('Password=123456');
+    Add('Password=' + ASenha);
     Add('Server=' + AServer);
     Add('DriverID=' + ADriver);
   end;
